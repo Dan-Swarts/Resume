@@ -1,6 +1,6 @@
 package Data;
 
-public class LinkedList<T extends Comparable<T>> implements MyList<T> {
+public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     // initialize variables:
     private Node head;
@@ -9,14 +9,14 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
 
 
     // constructor:
-    public LinkedList() {
+    public MyLinkedList() {
         this.head = new Node(null);
         isSorted = true;
     }
 
-    public LinkedList extractGroupsOf(int n){
+    public MyLinkedList extractGroupsOf(int n){
 
-        LinkedList output = new LinkedList();
+        MyLinkedList output = new MyLinkedList();
 
         if(n <= 0){
             return output;
@@ -28,14 +28,14 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
 
         Node currNode = head;
         int currIndex = 0;
-        LinkedList subList = new LinkedList();
+        MyLinkedList subList = new MyLinkedList();
 
         while(currNode.getNext() != null){
             subList.add(currNode.getNext().getData());
 
             if(currIndex % n == 0){
                 output.add((Comparable) subList);
-                subList = new LinkedList();
+                subList = new MyLinkedList();
             }
 
             currNode = currNode.getNext();
@@ -357,7 +357,7 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
     }
 
     public static void main(String args[]){
-        LinkedList myList = new LinkedList();
+        MyLinkedList myList = new MyLinkedList();
 
         myList.add('A');
         myList.add('B');

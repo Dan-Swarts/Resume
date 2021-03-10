@@ -3,11 +3,11 @@ package Data;
 public class Queue<T extends Comparable<T>> {
 
     // variables:
-    private LinkedList data;
+    private MyLinkedList data;
 
     // constructors:
     public Queue(){
-        data = new LinkedList();
+        data = new MyLinkedList();
     }
 
     // methods:

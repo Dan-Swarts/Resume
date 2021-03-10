@@ -1,6 +1,6 @@
 package Data;
 
-public class BinaryNode<T> {
+public class BinaryNode<T extends Comparable<T>> {
 
     // variables:
     private BinaryNode left;
