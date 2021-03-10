@@ -38,5 +38,6 @@ public class Node<T extends Comparable<T>> {
     }
 
     public static void main(String args[]) {
+        System.out.println(3);
     }
 }
