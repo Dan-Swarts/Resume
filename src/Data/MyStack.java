@@ -1,4 +1,4 @@
-// StackGen.java
+package Data;// StackGen.java
 // A Possible Generic Stack Interface
 // Identify the methods as absolutely necssary, nice to have,
 // or redundant

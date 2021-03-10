@@ -1,6 +1,10 @@
+package Data;
+
 // Stack1Gen.java
 // The StackGen Interface is implemented using a linked list
 // The linked list used is a simple generic node class called NGen.  (See NGen.java)
+
+import Data.MyStack;
 
 public class Stack<T extends Comparable<T>> implements MyStack<T> {
 
@@ -11,7 +15,7 @@ public class Stack<T extends Comparable<T>> implements MyStack<T> {
     // constructor
 
     public Stack() {}
-    
+
     // selectors
 
     public void push(T o) {
@@ -20,23 +24,23 @@ public class Stack<T extends Comparable<T>> implements MyStack<T> {
 
     public T pop() {
         if (start == null)
-          throw new RuntimeException("Tried to pop an empty stack");
+            throw new RuntimeException("Tried to pop an empty stack");
         else {
-          T data = start.getData();
-          start = start.getNext();
-          return data;
+            T data = start.getData();
+            start = start.getNext();
+            return data;
         }
     }
 
     public T peek() {
         if (start == null)
-          return null;
+            return null;
         else return start.getData();
     }
 
     public boolean isEmpty() {
         if (start == null)
-          return true;
+            return true;
         else return false;
     }
 
