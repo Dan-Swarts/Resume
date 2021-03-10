@@ -6,6 +6,8 @@ public class LinkedList<T extends Comparable<T>> implements MyList<T> {
     private Node head;
     private boolean isSorted;
 
+
+
     // constructor:
     public LinkedList() {
         this.head = new Node(null);
