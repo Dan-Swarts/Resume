@@ -1,24 +1,24 @@
 package Data;
 
-public class BinaryNode {
+public class BinaryNode<T> {
 
     // variables:
     private BinaryNode left;
     private BinaryNode right;
-    private int data;
+    private T data;
 
     // constructors:
-    public BinaryNode(int data, BinaryNode right, BinaryNode left){
+    public BinaryNode(T data, BinaryNode right, BinaryNode left){
         this.data = data;
         this.right = right;
         this.left = left;
     }
-    public BinaryNode(int data){
+    public BinaryNode(T data){
         this.data = data;
     }
 
     // getters:
-    public int getValue(){
+    public T getValue(){
         return data;
     }
 
@@ -37,7 +37,7 @@ public class BinaryNode {
     public void setRight(BinaryNode right){
         this.right = right;
     }
-    public void setData(int data){
+    public void setData(T data){
         this.data = data;
     }
 }
