@@ -1,10 +1,10 @@
-package Data;
+package DataStructures;
 
 public interface MyList<T extends Comparable<T>> {
     /*
      * Add an element to end of the list. If element is null,
      * it will NOT add it and return false.  Otherwise, it
-     * will add it and return true. Updates isSorted to false.
+     * will add it and return true.
      */
     boolean add(T element);
 
@@ -66,32 +66,11 @@ public interface MyList<T extends Comparable<T>> {
     T remove(int index);
 
     /*
-     * Removes all elements of the list that are less than or equal to 'element'.
-     * When this function returns, the only elements that should be left in this list
-     * are greater than 'element'.
-     * If isSorted is true, uses the ordering of the list to
-     * increase the efficiency of the search.
-     * This method should not change the ordering of the list.
+     * Remove the first instance of the object T from the list.
+     * Return the index of the object removed. If the object isn't
+     * on the list, return -1.
      */
-    void greaterThan(T element);
-
-    /*
-     * Removes all elements of the list that are greater than or equal to 'element'.
-     * When this function returns, the only elements that should be left in this list
-     * are less than 'element'.
-     * If isSorted is true, uses the ordering of the list to
-     * increase the efficiency of the search.
-     * This method should not change the ordering of the list.
-     */
-    void lessThan(T element);
-
-    /*
-     * Removes all elements of the list that are not equal to 'element'
-     * When this function returns, the only elements that should be left in this list
-     * are equal to 'element'.
-     * This method should not change the ordering of the list.
-     */
-    void equalTo(T element);
+    int remove(T object);
 
     /*
      * Note that this method exists for debugging purposes.

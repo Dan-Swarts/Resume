@@ -1,4 +1,4 @@
-package Data;
+package DataStructures;
 
 public class Queue<T extends Comparable<T>> {
 

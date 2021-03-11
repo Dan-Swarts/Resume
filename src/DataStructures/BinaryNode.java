@@ -1,4 +1,4 @@
-package Data;
+package DataStructures;
 
 public class BinaryNode<T extends Comparable<T>> {
 

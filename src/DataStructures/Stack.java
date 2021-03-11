@@ -1,10 +1,8 @@
-package Data;
+package DataStructures;
 
 // Stack1Gen.java
 // The StackGen Interface is implemented using a linked list
 // The linked list used is a simple generic node class called NGen.  (See NGen.java)
-
-import Data.MyStack;
 
 public class Stack<T extends Comparable<T>> implements MyStack<T> {
 

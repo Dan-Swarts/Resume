@@ -1,4 +1,4 @@
-package Data;
+package DataStructures;
 
 public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
@@ -209,6 +209,11 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         return output;
     }
 
+    @Override
+    public int remove(T object) {
+        return 0;
+    }
+
     public String toString(){
         String out = "";
 
@@ -224,7 +229,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         return out;
     }
 
-    @Override
+
     public void greaterThan(T element) {
         if(isEmpty()){
             return;
@@ -264,7 +269,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         }
     }
 
-    @Override
+
     public void lessThan(T element) {
         if(isEmpty()){
             return;
@@ -303,7 +308,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
         }
     }
 
-    @Override
+
     public void equalTo(T element) {
         if(isEmpty()){
             return;

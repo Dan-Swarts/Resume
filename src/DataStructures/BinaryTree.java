@@ -1,4 +1,4 @@
-package Data;
+package DataStructures;
 
 public class BinaryTree<V extends Comparable<V>> {
 
