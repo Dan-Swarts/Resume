@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class DictionaryImplementation {
 
     public static void main(String[] args) throws FileNotFoundException {
-        Dictionary slang = new Dictionary("C:\\Users\\danst\\IdeaProjects\\csci2081\\src\\H3\\slangdictionary.txt",100);
+        Dictionary slang = new Dictionary("C:\\Users\\danst\\IdeaProjects\\Resume\\src\\csci2081\\H3\\slangdictionary.txt",100);
 
         Scanner in = new Scanner(System.in);
         String input;
