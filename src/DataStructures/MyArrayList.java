@@ -3,15 +3,76 @@ package DataStructures;
 public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     public static void main(String[] args) {
-        MyArrayList myList = new MyArrayList<Integer>(10);
-        myList.add(2,20);
-        myList.add(6,19);
-        myList.add(7,10);
-        myList.add(0,40);
-        myList.add(60);
+        MyArrayList myList = new MyArrayList<Integer>(100);
+        myList.testAdd(219, -553, 470, -960);
         System.out.println(myList);
-        myList.remove(0);
+        myList.sort();
         System.out.println(myList);
+    }
+
+    public int length(){
+        return nextEmpty;
+    }
+
+
+    public void testAdd(T a, T b, T c, T d){
+        add(a);
+        add(b);
+        add(c);
+        add(d);
+    }
+
+    // this method removes all stray null values
+    public void squish(){
+        for(int i = 0; i < nextEmpty - 1; i++){
+            if(data[i] == null){
+                remove(i);
+                i--;
+            }
+        }
+    }
+
+    public void sort() {
+        selectionSort();
+    }
+
+    public void selectionSort(){
+        squish();
+        if(nextEmpty < 2){
+            return;
+        }
+
+        for(int i = 0; i < nextEmpty - 1; i++){
+            int smallestIndex = i;
+            for(int n = i + 1; n < nextEmpty; n++){
+                if(data[n].compareTo(data[smallestIndex]) < 0){
+                    smallestIndex = n;
+                }
+            }
+            swap(i,smallestIndex);
+        }
+    }
+
+    private void quickSort(int start, int end){
+        if(start < end){
+            int pIndex = partition(start,end);
+            quickSort(start,pIndex - 1);
+            quickSort(pIndex + 1, end);
+        }
+    }
+
+    private int partition(int start, int end) {
+        T pivot = data[start];
+        int pivotIndex = start;
+
+        for(int i = start + 1; i <= end; i++){
+            if(data[i].compareTo(pivot) < 0){
+                swap(i,pivotIndex);
+                pivotIndex++;
+            }
+        }
+
+        return pivotIndex;
     }
 
     // variables:
@@ -112,9 +173,18 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
             return out;
         }
 
-        for(int i = index; i < nextEmpty + 1; i++){
-            swap(i,i++);
+        Comparable[] newData = new Comparable[size()];
+        for(int i = 0; i < index; i++){
+            newData[i] = data[i];
+
         }
+
+        for(int i = index; i < nextEmpty; i++){
+            newData[i] = data[i + 1];
+        }
+
+        data = (T[]) newData;
+
         return out;
     }
 
@@ -157,14 +227,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         return true;
     }
 
-    // this method removes all stray null values
-    public void squish(){
-        for(int i = 0; i < nextEmpty - 1; i++){
-            if(data[i] == null){
-                remove(i);
-            }
-        }
-    }
+
 
     public void swap(int index1, int index2){
         Comparable temp;
@@ -174,44 +237,16 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         return;
     }
 
-    private void quickSort(int start, int end){
-        if(start < end){
-            int pIndex = partition(start,end);
-            quickSort(start,pIndex - 1);
-            quickSort(pIndex + 1, end);
-        }
-    }
-
-    private int partition(int start, int end){
-        T pivot = (T) data[end];
-        int pIndex = start;
-        for(int i = start; i < end; i++){
-            if(data[i].compareTo(pivot) <= 0){
-                swap(i,pIndex);
-                if(i == end){}
-                else{
-                pIndex++;
-                }
-            }
-        }
-        return pIndex;
-    }
-
-    public void sort() {
-        squish();
-        quickSort(0,nextEmpty);
-    }
-
 
     public String toString(){
         String output = "";
-        for(int i = 0; i < size(); i++){
+        for(int i = 0; i < nextEmpty; i++){
             if(data[i] == null){
                 output += "null\n";
             }
             else{output += data[i].toString() + "\n";
             }
         }
-    return output;
+        return output;
     }
 }
