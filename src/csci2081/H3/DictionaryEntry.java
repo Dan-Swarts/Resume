@@ -68,12 +68,24 @@ public class DictionaryEntry implements Comparable<DictionaryEntry> {
     }
 
     public String toString(){
-        return wordOrPhrase;
+        return wordOrPhrase + definition;
     }
 
     public boolean hasGot(String lookingFor){
         for(int i = 0; i < lookingFor.length(); i++){
-            if(wordOrPhrase.charAt(i) != lookingFor.charAt(i)){
+            if(Character.toLowerCase(wordOrPhrase.charAt(i)) != Character.toLowerCase(lookingFor.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean hasGotExact(String lookingFor){
+        if(lookingFor.length() != wordOrPhrase.length()){
+            return false;
+        }
+        for(int i = 0; i < wordOrPhrase.length(); i++){
+            if(Character.toLowerCase(wordOrPhrase.charAt(i)) != Character.toLowerCase(lookingFor.charAt(i))){
                 return false;
             }
         }

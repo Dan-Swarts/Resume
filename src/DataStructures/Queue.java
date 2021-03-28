@@ -1,5 +1,7 @@
 package DataStructures;
 
+import DataStructures.Lists.MyLinkedList;
+
 public class Queue<T extends Comparable<T>> {
 
     // variables:

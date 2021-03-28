@@ -4,11 +4,13 @@ package DataStructures;
 // The StackGen Interface is implemented using a linked list
 // The linked list used is a simple generic node class called NGen.  (See NGen.java)
 
+import DataStructures.Lists.MyLinkedNode;
+
 public class Stack<T extends Comparable<T>> implements MyStack<T> {
 
     // instance variables
 
-    private Node<T> start = null;
+    private MyLinkedNode<T> start = null;
 
     // constructor
 
@@ -17,7 +19,7 @@ public class Stack<T extends Comparable<T>> implements MyStack<T> {
     // selectors
 
     public void push(T o) {
-        start = new Node<T>(o, start);
+        start = new MyLinkedNode<T>(o, start);
     }
 
     public T pop() {
