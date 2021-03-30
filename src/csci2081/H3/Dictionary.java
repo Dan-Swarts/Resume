@@ -1,6 +1,6 @@
 package csci2081.H3;
 
-import DataStructures.Lists.MyArrayList;
+import DataStructures.Lists.MyArray;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class Dictionary {
 
     // variables:
-    private MyArrayList<DictionaryEntry> data;
+    private MyArray<DictionaryEntry> data;
 
     // constructor:
     Dictionary(String filePath, int length) throws FileNotFoundException {
 
-        data = new MyArrayList<>(length);
+        data = new MyArray<>(length);
         File slangDictionary = new File(filePath);
         Scanner slangReader = new Scanner(slangDictionary);
         String[] entry;
@@ -38,9 +38,9 @@ public class Dictionary {
         return data.toString();
     }
 
-    public void sort(){
-        data.sort();
-    }
+//    public void sort(){
+//        data.sort();
+//    }
 
     public String[] lookupPhrase(String lookingFor){
         String[] out = new String[data.length() + 1];
@@ -99,10 +99,10 @@ public class Dictionary {
         data.get(index).setDefinition(newDef);
     }
 
-    public void add(DictionaryEntry input){
-        data.add(input);
-        data.sort();
-    }
+//    public void add(DictionaryEntry input){
+//        data.add(input);
+//        data.sort();
+//    }
 
     public void remove(String wordOrPhrase){
         for(int i = 0; i < data.length(); i++){

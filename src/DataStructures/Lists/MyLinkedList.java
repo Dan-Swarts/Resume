@@ -1,378 +1,225 @@
 package DataStructures.Lists;
+import DataStructures.Nodes.LNode;
 
 public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
 
     // initialize variables:
-    private MyLinkedNode head;
-    private boolean isSorted;
+    private LNode<T> head;
+    private int size;
 
-
-
-    // constructor:
-    public MyLinkedList() {
-        this.head = new MyLinkedNode(null);
-        isSorted = true;
+    public static void main(String[] args) {
+        MyLinkedList<Integer> list = new MyLinkedList<Integer>();
+        list.add(2);
+        list.add(3);
+        System.out.println(list);
     }
 
-    public MyLinkedList extractGroupsOf(int n){
+    // constructors:
 
-        MyLinkedList output = new MyLinkedList();
-
-        if(n <= 0){
-            return output;
-        }
-
-        if(n >= size()){
-            return this;
-        }
-
-        MyLinkedNode currMyLinkedNode = head;
-        int currIndex = 0;
-        MyLinkedList subList = new MyLinkedList();
-
-        while(currMyLinkedNode.getNext() != null){
-            subList.add(currMyLinkedNode.getNext().getData());
-
-            if(currIndex % n == 0){
-                output.add((Comparable) subList);
-                subList = new MyLinkedList();
-            }
-
-            currMyLinkedNode = currMyLinkedNode.getNext();
-            currIndex += 1;
-        }
-
-        return output;
+    public MyLinkedList(){
+        head = null;
+        size = 0;
     }
 
-    @Override
-    public boolean add(T t) {
-
-        if(t == null){
-            return false;
-        }
-
-        MyLinkedNode currMyLinkedNode = head;
-        while(currMyLinkedNode.getNext() != null){
-            currMyLinkedNode = currMyLinkedNode.getNext();
-        }
-        currMyLinkedNode.setNext(new MyLinkedNode(t));
-
-        if(size() != 1){
-            isSorted = false;
-        }
-        return true;
+    public MyLinkedList(T element){
+        head = new LNode<T>(element);
+        size = 1;
     }
 
-    @Override
-    public boolean add(int index, T element) {
-
-        if(isEmpty() || index < 0 || index >= size()){
-            return false;
-        }
-
-        MyLinkedNode currMyLinkedNode = head;
-        int currIndex = 0;
-        while(currIndex < index){
-            currMyLinkedNode = currMyLinkedNode.getNext();
-            currIndex += 1;
-        }
-        currMyLinkedNode.setNext(new MyLinkedNode(element, currMyLinkedNode.getNext()));
-        isSorted = false;
-        return true;
-    }
-
-    @Override
-    public void clear() {
-        head.setNext(null);
-        isSorted = true;
-    }
-
-    @Override
-    public T get(int index) {
-
-        if (index < 0 || index >= size() || isEmpty()){
-            return null;
-        }
-
-        MyLinkedNode currMyLinkedNode = head.getNext();
-        int currIndex = 0;
-
-        while (currIndex < index){
-            currMyLinkedNode = currMyLinkedNode.getNext();
-            currIndex += 1;
-        }
-        return (T) currMyLinkedNode.getData();
-    }
-
-    @Override
-    public int indexOf(T element) {
-
-        if(isEmpty()){
-            return -1;
-        }
-
-        MyLinkedNode currNode = head.getNext();
-        int currIndex = 0;
-
+    public MyLinkedList(LNode<T> head){
+        this.head = head;
+        LNode<T> currNode = head;
+        size = 1;
         while(currNode.getNext() != null){
-
-            if(currNode.getData() == element){
-                return currIndex;
-            }
-
+            size++;
             currNode = currNode.getNext();
-            currIndex += 1;
-        }
-        return -1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        if(head.getNext() == null){
-            return true;
-        }
-        else{
-            return false;
         }
     }
 
-    @Override
-    public int size() {
-        MyLinkedNode currMyLinkedNode = head;
-        int CurrIndex = 0;
-
-        while (currMyLinkedNode.getNext() != null){
-            currMyLinkedNode = currMyLinkedNode.getNext();
-            CurrIndex += 1;
-        }
-        return CurrIndex;
-    }
-
-    @Override
-
-    // bubble sort algorithm
-    public void sort() {
-
-        // will not sort if empty or size of 1
-        if(size() <= 1){
-            return;
-        }
-
-        // sorts a number of times equal to the number of elements in the list minus 1
-        for(int i=0;i<size()-1;i++){
-
-            // each sort, the largest element will bubble up to the top of the list
-            MyLinkedNode currMyLinkedNode = head.getNext();
-
-            // goes through the list
-            while(currMyLinkedNode.getNext() != null){
-
-                // if previous data is larger than next data...
-                if(currMyLinkedNode.getData().compareTo(currMyLinkedNode.getNext().getData()) > 0){
-
-                    // ...switch data values
-                    Comparable temp = currMyLinkedNode.getData();
-                    currMyLinkedNode.setData(currMyLinkedNode.getNext().getData());
-                    currMyLinkedNode.getNext().setData(temp);
-                }
-
-                // iterate
-                currMyLinkedNode = currMyLinkedNode.getNext();
-            }
+    public MyLinkedList(T element, LNode<T> next){
+        head = new LNode<T>(element,next);
+        LNode<T> currNode = head;
+        size = 1;
+        while(currNode.getNext() != null){
+            size++;
+            currNode = currNode.getNext();
         }
     }
 
-    @Override
-    public T remove(int index) {
-
-        if(isEmpty() || index < 0 || index > size()){
-            return null;
+    public MyLinkedList(T[] data){
+        size = 0;
+        for (T datum : data) {
+            this.add(datum);
         }
-
-        MyLinkedNode currMyLinkedNode = head;
-        int currIndex = 0;
-
-        while(currIndex < index){
-            currMyLinkedNode = currMyLinkedNode.getNext();
-            currIndex += 1;
-        }
-
-        if(index == size()){
-            T output = (T) currMyLinkedNode.getNext().getData();
-            currMyLinkedNode.setNext(null);
-            return output;
-        }
-
-        T output = (T) currMyLinkedNode.getNext().getData();
-        currMyLinkedNode.setNext(currMyLinkedNode.getNext().getNext());
-        return output;
     }
 
-    @Override
-    public int remove(T object) {
-        return 0;
-    }
+    // methods:
+    public int size(){return size;}
 
     public String toString(){
         String out = "";
 
-        for(int i=0;i<size();i++){
-            if(i==size()-1){
-                out += String.format("%s.",get(i));
-                return out;
-            }
-            else {
-                out += String.format("%s, ", get(i));
+        // if list is empty:
+        if(size == 0){return out;}
+
+        LNode<T> currNode = head;
+        if(currNode.getData() != null){
+            out = currNode.getData().toString() + "\n";
+        }
+
+        for (int i = 1; i < size; i++) {
+            currNode = currNode.getNext();
+            if(currNode.getData() != null){
+                out += currNode.getData().toString() + "\n";
             }
         }
         return out;
     }
 
-
-    public void greaterThan(T element) {
-        if(isEmpty()){
-            return;
+    public boolean add(T element) {
+        if(element == null){
+            return false;
         }
-
-        MyLinkedNode currMyLinkedNode = head;
-
-        while(currMyLinkedNode.getNext() != null) {
-
-            // if next node's data is smaller than the element...
-            if (currMyLinkedNode.getNext().getData().compareTo(element) <= 0) {
-
-                // remove next node
-
-                // if at the end of the list, set node to null
-                if (currMyLinkedNode.getNext().getNext() == null) {
-                    currMyLinkedNode.setNext(null);
-                }
-
-                // otherwise skip next node
-                else{
-                    currMyLinkedNode.setNext(currMyLinkedNode.getNext().getNext());
-                }
+        LNode<T> next = new LNode<>(element);
+        if(head == null){
+            head = next;
+            size++;
+            return true;
+        }
+        else{
+            LNode<T> currNode = head;
+            while(currNode.getNext() != null){
+                currNode = currNode.getNext();
             }
-
-            // if next node's data is greater or equal to...
-            else {
-
-                // ...AND list is sorted...
-                if(isSorted){
-                    // ...every other element will also be greater
-                    return;
-                }
-                // ...increment
-                currMyLinkedNode = currMyLinkedNode.getNext();
-            }
+            currNode.setNext(next);
+            size++;
+            return true;
         }
     }
 
 
-    public void lessThan(T element) {
-        if(isEmpty()){
-            return;
+    public boolean add(int index, T element) {
+
+        if (element == null || index < 0) {
+            return false;
         }
 
-        MyLinkedNode currMyLinkedNode = head;
+        else if (index < size) {
+            LNode<T> next = new LNode<T>(element);
+            LNode<T> currNode = head;
+            for (int i = 0; i < index - 1; i++) {
+                currNode = currNode.getNext();
+            }
+            next.setNext(currNode.getNext());
+            currNode.setNext(next);
+            size++;
+            return true;
+        }
 
-        while(currMyLinkedNode.getNext() != null) {
+        else {
 
-            // if next node's data is greater than the element...
-            if (currMyLinkedNode.getNext().getData().compareTo(element) >= 0) {
-
-                // remove next node...
-
-                // if sorted, every future node will also be greater and must be removed
-                if(isSorted){
-                    currMyLinkedNode.setNext(null);
-                    return;
-                }
-
-                // if at the end of the list, set final Node to null
-                else if (currMyLinkedNode.getNext().getNext() == null) {
-                    currMyLinkedNode.setNext(null);
-                }
-
-                // else, skip next node
-                else {
-                    currMyLinkedNode.setNext(currMyLinkedNode.getNext().getNext());
-                }
+            if (head == null) {
+                head = new LNode<T>();
             }
 
-            else {
-                // increment if nothing was removed
-                currMyLinkedNode = currMyLinkedNode.getNext();
+            LNode<T> currNode = head;
+
+            for (int i = 0; i < index; i++) {
+                if (currNode.getNext() != null) {
+                    currNode = currNode.getNext();
+                }
+                currNode.setNext(new LNode<T>());
+                currNode = currNode.getNext();
             }
+            currNode.setData(element);
+            size = index + 1;
+            return true;
+        }
+    }
+
+    public void clear() {
+        head = new LNode<T>();
+        size = 0;
+    }
+
+    public boolean set(int index, T element) {
+        if (index < 0) {
+            return false;
+        }
+
+        else if (index < size) {
+            LNode<T> currNode = head;
+            for (int i = 0; i < index; i++) {
+                currNode = currNode.getNext();
+            }
+            currNode.setData(element);
+        }
+
+        else {
+            LNode<T> currNode;
+            if (head == null) {
+                currNode = new LNode<T>();
+                head = currNode;
+            } else {
+                currNode = head;
+            }
+
+            for (int i = 0; i < index; i++) {
+                if (currNode.getNext() != null) {
+                } else {
+                    currNode.setNext(new LNode<T>());
+                }
+                currNode = currNode.getNext();
+            }
+            currNode.setData(element);
+            size = index + 1;
+            return true;
+        }
+        return true;
+    }
+
+    public void squish(){}
+
+
+    public T get(int index) {
+        if(index < 0 || index > size){return null;}
+        else{
+            LNode<T> currNode = head;
+            for (int i = 0; i < index; i++) {
+                currNode = currNode.getNext();
+            }
+            return currNode.getData();
         }
     }
 
 
-    public void equalTo(T element) {
-        if(isEmpty()){
-            return;
-        }
-
-        MyLinkedNode currMyLinkedNode = head;
-
-        while(currMyLinkedNode.getNext() != null) {
-
-            // if next node's data is not equal to the element...
-            if (currMyLinkedNode.getNext().getData().compareTo(element) != 0) {
-
-                // remove next node...
-
-                // if at the end of the list, set final Node to null
-                if (currMyLinkedNode.getNext().getNext() == null) {
-                    currMyLinkedNode.setNext(null);
-                }
-
-                // else, skip next node
-                else {
-                    currMyLinkedNode.setNext(currMyLinkedNode.getNext().getNext());
-                }
+    public int indexOf(T element) {
+        LNode<T> currNode = head;
+        for (int i = 0; i < size; i++) {
+            if(currNode.getData().compareTo(element) == 0){
+                return i;
             }
-
-            else {
-                // increment if nothing was removed
-                currMyLinkedNode = currMyLinkedNode.getNext();
-            }
+            currNode = currNode.getNext();
         }
+        return -1;
     }
 
-    public void removeEvery(int n){
-        if(n<=0 || n > size()){
-            return;
-        }
-        MyLinkedNode currMyLinkedNode = head;
-        int nth = 1;
-        int index = 0;
-        while(currMyLinkedNode.getNext() != null){
-            if(nth == n){
-                remove(index);
-                nth = 1;
-            }
-            else{
-                currMyLinkedNode = currMyLinkedNode.getNext();
-                index += 1;
-                nth += 1;
-            }
-        }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
-    public static void main(String args[]){
-        MyLinkedList myList = new MyLinkedList();
+    public void sort() {
 
-        myList.add('A');
-        myList.add('B');
-        myList.add('C');
-        myList.add('D');
-        myList.add('E');
-        myList.add('F');
+    }
 
-        System.out.println(myList.toString());
 
-        System.out.println(myList.extractGroupsOf(2));
+    public T remove(int index) {
+        return null;
+    }
+
+
+    public int remove(T object) {
+        return 0;
     }
 }

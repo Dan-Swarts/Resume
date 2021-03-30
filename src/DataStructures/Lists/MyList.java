@@ -1,6 +1,6 @@
 package DataStructures.Lists;
 
-public interface MyList<T extends Comparable<T>> {
+public interface MyList<T> {
     /*
      * Add an element to end of the list. If element is null,
      * it will NOT add it and return false.  Otherwise, it
@@ -49,14 +49,6 @@ public interface MyList<T extends Comparable<T>> {
      * initialized with a size of 20, this will return 20.
      */
     int size();
-
-    /*
-     * Sort the elements of the list in ascending order using insertion sort.
-     * If isSorted is true, do NOT re-sort.
-     * Hint: Since T extends Comparable, you will find it useful
-     * to use the public int compareTo(T other) method.
-     */
-    void sort();
 
     /*
      * Remove whatever is at index index in the list and return

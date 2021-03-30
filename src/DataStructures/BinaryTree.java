@@ -1,20 +1,22 @@
 package DataStructures;
 
+import DataStructures.Nodes.BNode;
+
 public class BinaryTree<V extends Comparable<V>> {
 
-    private BinaryNode root;
+    private BNode root;
 
-    public BinaryTree(BinaryNode root) {
+    public BinaryTree(BNode root) {
         this.root = root;
     }
 
-    public BinaryNode getRoot() {
+    public BNode getRoot() {
         return this.root;
     }
 
     public void printInOrder() { printInOrderHelper(root); }
 
-    private void printInOrderHelper(BinaryNode b) {
+    private void printInOrderHelper(BNode b) {
 
         if(b.getLeft() == null && b.getRight() == null){
             System.out.print(b.getValue() + " ");
@@ -40,7 +42,7 @@ public class BinaryTree<V extends Comparable<V>> {
 
     public void printPreorder(){ printPreorderHelper(root); }
 
-    private void printPreorderHelper(BinaryNode node) {
+    private void printPreorderHelper(BNode node) {
 
         if(node.getLeft() == null && node.getRight() == null){
             System.out.print(node.getValue() + " ");
@@ -66,7 +68,7 @@ public class BinaryTree<V extends Comparable<V>> {
 
     public void printPostorder() { printPostorderHelper(root); }
 
-    private void printPostorderHelper(BinaryNode node) {
+    private void printPostorderHelper(BNode node) {
 
         if(node.getLeft() == null && node.getRight() == null){
             System.out.print(node.getValue() + " ");
